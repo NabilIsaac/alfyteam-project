@@ -5,6 +5,8 @@
     @yield('content')
 
     @include('layout.partials.scripts')
+
+    @stack('scripts')
     
 </body>
 </html>

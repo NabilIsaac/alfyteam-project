@@ -44,7 +44,7 @@
 </nav> --}}
 
 
-<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800">
+<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 playfair">
     <div class="container flex flex-wrap items-center justify-between mx-auto">
     <a href="#" class="flex items-center md:hidden">
         <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"> Luxe Tribes</span>
@@ -86,7 +86,7 @@
               <li>
                   <a href="#" class="flex items-center justify-center w-20 h-8 p-2 border border-black rounded-lg">
                       <img src="{{ asset('assets/imgs/user-regular.svg') }}" class="w-4 h-4 " alt="">
-                      <span class="ml-1 text-sm">Log in</span>
+                      <span class="ml-1 font-sans text-sm">Log in</span>
                   </a>
               </li>
           </ul>

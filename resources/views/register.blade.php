@@ -10,27 +10,22 @@
     
     <div class="grid grid-cols-1 gap-5 px-5 py-10 mx-auto md:grid-cols-2 max-w-7xl">
         <div class="flex flex-col">
-            <p class="mt-5 text-3xl md:mt-20 md:w-80 mb-14">Become a Part of the Luxe Tribes!</p>
+            <p class="mt-5 text-3xl md:mt-20 md:w-80 mb-14 playfair">Become a Part of the Luxe Tribes!</p>
             <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="flex flex-row mb-5 md:w-80">
-                    @if(request()->input('photo'))
-                        <img src="{{ request()->input('photo')->temporaryUrl() }}" class="mx-auto rounded-full w-14 h-14">
-                        {{-- <img src="{{ asset('storage/'.$photo) }}" alt="{{ $name }}" class="w-32 h-32 mr-5 rounded-full"> --}}
-
-                    @else
+                  
                         <div class="flex items-center justify-center w-20 h-20 mr-5 bg-gray-300 rounded-full">
-                            <img src="{{ asset('assets/imgs/user-regular.svg') }}" class="mx-auto w-14 h-14" alt="">
+                            <img id="preview-image-before-upload" src="{{ asset('assets/imgs/user-regular.svg') }}" class="mx-auto w-14 h-14" alt="">
                         </div>
-                    @endif
                     
                     <div >
-                        <p>Add your photo (optional)</p>
-                        <p class="my-1 text-xs text-gray-400">Supported formats: jpg, jpeg, png</p>
+                        <p class="playfair">Add your photo (optional)</p>
+                        <p class="my-1 text-xs text-gray-400 playfair">Supported formats: jpg, jpeg, png</p>
                         <div class="flex">
                            
                             <input type="file" name="photo" id="my-file" hidden/>
-                            <label  class="flex text-sm text-gray-700 rounded-full cursor-pointer" for="my-file">
+                            <label  class="flex text-sm text-gray-700 rounded-full cursor-pointer playfair" for="image">
                                 <img src="{{ asset('assets/imgs/upload-solid.svg') }}" class="w-4 h-4 mr-1" alt="">
                                 Click to upload
                             </label>
@@ -142,11 +137,11 @@
 
         <div class="justify-end hidden w-full sm:flex">
             <div class="relative flex flex-row items-center w-10/12 h-full rounded-l-3xl bg-gray-50">
-                <img src="{{ asset('assets/imgs/back-4.svg') }}" class="absolute mt-20 -left-20 rounded-3xl w-96" alt="">
+                <img src="{{ asset('assets/imgs/back-4.svg') }}" class="absolute -left-20 rounded-3xl w-96" alt="">
 
                 <div class="absolute flex flex-col top-20 right-4">
                     <img src="{{ asset('assets/imgs/back-5.svg') }}" class="w-40 h-52 rounded-3xl" alt="">
-                    <img src="{{ asset('assets/imgs/back-8.jpeg') }}" class="w-40 mt-36 h-52 rounded-3xl" alt="">
+                    <img src="{{ asset('assets/imgs/back-8.jpeg') }}" class="w-40 h-40 mt-36 rounded-3xl" alt="">
                 </div>
             </div>
         </div>
@@ -155,3 +150,29 @@
 
 
 @endsection
+
+@push('scripts')
+
+<script type="text/javascript">
+      
+    $(document).ready(function (e) {
+     
+       
+       $('#image').change(function(){
+                
+        let reader = new FileReader();
+     
+        reader.onload = (e) => { 
+     
+          $('#preview-image-before-upload').attr('src', e.target.result); 
+        }
+     
+        reader.readAsDataURL(this.files[0]); 
+       
+       });
+       
+    });
+     
+    </script>
+    
+@endpush

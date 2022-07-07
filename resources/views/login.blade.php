@@ -10,7 +10,7 @@
 
     <div class="grid h-screen grid-cols-1 gap-5 p-5 mx-auto md:grid-cols-2 max-w-7xl">
         <div class="flex flex-col">
-            <p class="mt-20 text-4xl mb-14">Welcome Back!</p>
+            <p class="mt-20 text-4xl mb-14 playfair">Welcome Back!</p>
 
             <form action="{{ route('login.store') }}" method="POST">
                 @csrf
