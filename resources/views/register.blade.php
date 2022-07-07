@@ -8,21 +8,28 @@
 
 @section('content')
     
-    <div class="grid grid-cols-2 gap-5 px-5 py-10 mx-auto max-w-7xl">
+    <div class="grid grid-cols-1 gap-5 px-5 py-10 mx-auto md:grid-cols-2 max-w-7xl">
         <div class="flex flex-col">
-            <p class="mt-20 text-3xl w-80 mb-14">Become a Part of the Luxe Tribes!</p>
+            <p class="mt-5 text-3xl md:mt-20 md:w-80 mb-14">Become a Part of the Luxe Tribes!</p>
             <form action="{{ route('store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="flex flex-row mb-5 w-80">
-                    <div class="flex items-center justify-center mr-5 bg-gray-300 rounded-full w-18 h-18">
-                        <img src="{{ asset('assets/imgs/user-regular.svg') }}" class="mx-auto w-14 h-14" alt="">
-                    </div>
+                <div class="flex flex-row mb-5 md:w-80">
+                    @if(request()->input('photo'))
+                        <img src="{{ request()->input('photo')->temporaryUrl() }}" class="mx-auto rounded-full w-14 h-14">
+                        {{-- <img src="{{ asset('storage/'.$photo) }}" alt="{{ $name }}" class="w-32 h-32 mr-5 rounded-full"> --}}
+
+                    @else
+                        <div class="flex items-center justify-center w-20 h-20 mr-5 bg-gray-300 rounded-full">
+                            <img src="{{ asset('assets/imgs/user-regular.svg') }}" class="mx-auto w-14 h-14" alt="">
+                        </div>
+                    @endif
+                    
                     <div >
                         <p>Add your photo (optional)</p>
                         <p class="my-1 text-xs text-gray-400">Supported formats: jpg, jpeg, png</p>
                         <div class="flex">
                            
-                            <input type="file" name="photo" accept="image/*" id="my-file" hidden/>
+                            <input type="file" name="photo" id="my-file" hidden/>
                             <label  class="flex text-sm text-gray-700 rounded-full cursor-pointer" for="my-file">
                                 <img src="{{ asset('assets/imgs/upload-solid.svg') }}" class="w-4 h-4 mr-1" alt="">
                                 Click to upload
@@ -37,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-5 border-t border-gray-100">
+                <div class="grid grid-cols-1 gap-5 border-t border-gray-100 md:grid-cols-2">
                     <div>
                         <input type="text" name="fullname" class="w-full h-12 p-3 mt-5 mb-5 border border-gray-300 rounded-2xl" placeholder="Name">
                         @if ($errors->has('fullname'))
@@ -133,7 +140,7 @@
             <a href="{{ route('login') }}" class="mb-5 text-gray-400">Already have an account? <span class="text-black">Log in</span></a>
         </div>
 
-        <div class="flex justify-end w-full">
+        <div class="justify-end hidden w-full sm:flex">
             <div class="relative flex flex-row items-center w-10/12 h-full rounded-l-3xl bg-gray-50">
                 <img src="{{ asset('assets/imgs/back-4.svg') }}" class="absolute mt-20 -left-20 rounded-3xl w-96" alt="">
 

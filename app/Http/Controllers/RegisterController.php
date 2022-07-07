@@ -30,9 +30,14 @@ class RegisterController extends Controller
             'phone' => 'required',
             'password' => 'required',
             'description' => 'nullable',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $user = new User();
+        if (!empty($request->photo)) {
+            $user->addMediaFromRequest('photo')
+                ->toMediaCollection('photo');
+        }
         $user->fullname = $request->fullname;
         $user->username = $request->username;
         $user->date_of_birth = $request->date_of_birth;
