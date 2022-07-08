@@ -12,9 +12,7 @@ class RegisterController extends Controller
     public function index()
     {
         $countries = Country::get();
-        $country_codes = Country::all()
-        ->where('country_code' , '233');
-        return view('register', compact('countries', 'country_codes'));
+        return view('register', compact('countries'));
     }
 
 
@@ -28,7 +26,7 @@ class RegisterController extends Controller
             'country_id' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required',
-            'password' => 'required',
+            'password' => 'required|confirmed|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'description' => 'nullable',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
@@ -43,7 +41,7 @@ class RegisterController extends Controller
         $user->date_of_birth = $request->date_of_birth;
         $user->country_id = $request->country_id;
         $user->email = $request->email;
-        $user->phone = $request->phone;
+        $user->phone = $request->country_code . $request->phone;
         $user->password = bcrypt($request->password);
         $user->description = $request->description;
 

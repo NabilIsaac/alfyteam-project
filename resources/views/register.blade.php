@@ -16,21 +16,21 @@
                 <div class="flex flex-row mb-5 md:w-80">
                   
                         <div class="flex items-center justify-center w-20 h-20 mr-5 bg-gray-300 rounded-full">
-                            <img id="preview-image-before-upload" src="{{ asset('assets/imgs/user-regular.svg') }}" class="mx-auto w-14 h-14" alt="">
+                            <img id="preview-image-before-upload" src="{{ asset('assets/imgs/user-regular.svg') }}" class="w-20 h-20 mx-auto rounded-full" alt="">
                         </div>
                     
                     <div >
                         <p class="playfair">Add your photo (optional)</p>
-                        <p class="my-1 text-xs text-gray-400 playfair">Supported formats: jpg, jpeg, png</p>
+                        <p class="my-1 text-xs text-gray-400 ">Supported formats: jpg, jpeg, png</p>
                         <div class="flex">
                            
-                            <input type="file" name="photo" id="my-file" hidden/>
-                            <label  class="flex text-sm text-gray-700 rounded-full cursor-pointer playfair" for="image">
+                            <input type="file" name="photo" id="image" hidden/>
+                            <label  class="flex text-sm text-gray-700 rounded-full cursor-pointer" for="image">
                                 <img src="{{ asset('assets/imgs/upload-solid.svg') }}" class="w-4 h-4 mr-1" alt="">
                                 Click to upload
                             </label>
                             @if ($errors->has('photo'))
-                            <div class="text-red-500">
+                            <div class="text-xs italic text-red-500">
                                 {{ $errors->first('photo') }}
                             </div>
                             @endif
@@ -43,7 +43,7 @@
                     <div>
                         <input type="text" name="fullname" class="w-full h-12 p-3 mt-5 mb-5 border border-gray-300 rounded-2xl" placeholder="Name">
                         @if ($errors->has('fullname'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('fullname') }}
                         </div>
                         @endif
@@ -51,7 +51,7 @@
                     <div>
                         <input type="date" name="date_of_birth" class="w-full h-12 p-3 mt-5 mb-3 border border-gray-300 rounded-2xl" placeholder="DOB">
                         @if ($errors->has('date_of_birth'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('date_of_birth') }}
                         </div>
                         @endif
@@ -66,7 +66,7 @@
                             @endforeach
                         </select>
                         @if ($errors->has('country_id'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('country_id') }}
                         </div>
                         @endif
@@ -78,15 +78,16 @@
                         </div>
                         
                         @if ($errors->has('email'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('email') }}
                         </div>
                         @endif
                     </div>
+                    
                     <div>
                         <div class="flex h-12 mb-5 border border-gray-300 rounded-2xl">
                             <select class="w-20 bg-gray-100 rounded-l-2xl" name="country_code">
-                                @foreach ($country_codes as $country)
+                                @foreach ($countries as $country)
                                     <option value="{{ $country->id }}">
                                         {{ $country->country_code }} 
                                     </option>
@@ -95,7 +96,7 @@
                             <input type="text" name="phone" class="p-3 w-80" placeholder="Phone number">
                         </div>
                         @if ($errors->has('phone'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('phone') }}
                         </div>
                         @endif
@@ -104,7 +105,7 @@
                     <div>
                         <input type="text" name="username" class="w-full h-12 p-3 mb-3 border border-gray-300 rounded-2xl" placeholder="Username">
                         @if ($errors->has('username'))
-                        <div class="text-red-500">
+                        <div class="text-xs italic text-red-500">
                             {{ $errors->first('username') }}
                         </div>
                         @endif
@@ -114,7 +115,7 @@
                 <div>
                     <input type="password" name="password" class="w-full h-12 p-3 mb-5 border border-gray-300 rounded-2xl" placeholder="Password">
                     @if ($errors->has('password'))
-                    <div class="text-red-500">
+                    <div class="text-xs italic text-red-500">
                         {{ $errors->first('password') }}
                     </div>
                     @endif
@@ -122,7 +123,7 @@
                 <div>
                     <textarea name="description" id="" cols="30" class="w-full p-3 mb-5 border border-gray-300 rounded-2xl" placeholder="Tell us about yourself (optional)" rows="5"></textarea>
                     @if ($errors->has('description'))
-                    <div class="text-red-500">
+                    <div class="text-xs italic text-red-500">
                         {{ $errors->first('description') }}
                     </div>
                     @endif
@@ -151,7 +152,7 @@
 
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
 
 <script type="text/javascript">
       
@@ -175,4 +176,18 @@
      
     </script>
     
-@endpush
+@endpush --}}
+
+{{-- @section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#image').change(function () {
+                let reader = new FileReader();
+                reader.onload = (e) => {
+                    $('#preview-image-before-upload').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            });
+        });
+    </script>
+@endsection --}}
