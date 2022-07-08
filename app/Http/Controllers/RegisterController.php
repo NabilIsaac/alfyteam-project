@@ -26,9 +26,9 @@ class RegisterController extends Controller
             'country_id' => 'required',
             'email' => 'required|email|unique:users',
             'phone' => 'required',
-            'password' => 'required|confirmed|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            'password' => 'required|min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
             'description' => 'nullable',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $user = new User();
@@ -47,7 +47,7 @@ class RegisterController extends Controller
 
         // dd($user);
         $user->save();
-        $request->session->flash('success', 'You have successfully registered!');
+        // $request->session->flash('success', 'You have successfully registered!');
         return redirect('/');
     }
 }
